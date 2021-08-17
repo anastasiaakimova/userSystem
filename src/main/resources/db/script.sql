@@ -6,9 +6,11 @@ db.users.insertOne(
         "name": "Tom",
         "password": "1234",
         "telephone": "1234",
-        "active": "false"
+        "isActive": false
     }
     )
+
+db.users.createIndex({id:1}, {unique: true})
 
 db.users.insertMany([
     {
@@ -16,7 +18,7 @@ db.users.insertMany([
         "name": "Kate",
         "password": "0987",
         "telephone": "7896",
-        "active": "true"
+        "isActive": true
     },
 
     {
@@ -24,7 +26,7 @@ db.users.insertMany([
         "name": "Alex",
         "password": "0987rtyu",
         "telephone": "789624357",
-        "active": "false"
+        "isActive": false
     },
 
     {
@@ -32,10 +34,6 @@ db.users.insertMany([
         "name": "Mary",
         "password": "qwer0912387rtyu",
         "telephone": "700000",
-        "active": "true"
+        "isActive": true
     }
 ])
-
-
-
-
