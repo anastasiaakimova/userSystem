@@ -38,16 +38,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(UUID id, User user) {
         User savedUser = userRepository.findById(id);
-        /*
-                .orElseThrow(() -> new RuntimeException(
-                String.format("Can't find user by id", user.getId())));
-*/
+
         savedUser.setName(user.getName());
         savedUser.setPassword(user.getPassword());
         savedUser.setPhone(user.getPhone());
         savedUser.setIsActive(user.getIsActive());
+        User updatedUser = userRepository.save(savedUser);
 
-        return userRepository.save(savedUser);
+        return updatedUser;
     }
 
     @Override
