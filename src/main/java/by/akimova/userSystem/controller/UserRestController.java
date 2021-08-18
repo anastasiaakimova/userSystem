@@ -7,37 +7,38 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
 public class UserRestController {
 
-    private final UserService service;
+    private final UserService userService;
 
-    public UserRestController(UserService service) {
-        this.service = service;
+    public UserRestController(UserService userService) {
+        this.userService = userService;
     }
 
     @PostMapping
     public ResponseEntity addUser(@RequestBody User user) {
-        service.saveUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        userService.saveUser(user);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok(service.findAll());
+        return ResponseEntity.ok(userService.findAll());
     }
 
     @PutMapping("/{id}")
-    private ResponseEntity updateUser(@PathVariable(value = "id") String id, @RequestBody User user) {
-        service.updateUser(id, user);
-        return ResponseEntity.ok().build();
+    private ResponseEntity updateUser(@PathVariable(value = "id") UUID id, @RequestBody User user) {
+        userService.updateUser(id, user);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteUser(@PathVariable (value = "id") String id) {
-        service.deleteUserById(id);
+    public ResponseEntity deleteUser(@PathVariable(value = "id") UUID id) {
+        userService.deleteUserById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
