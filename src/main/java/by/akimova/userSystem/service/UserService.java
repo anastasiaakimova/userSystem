@@ -3,6 +3,7 @@ package by.akimova.userSystem.service;
 import by.akimova.userSystem.model.User;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface UserService {
     List<User> findAll();
@@ -11,7 +12,7 @@ public interface UserService {
 
     User saveUser(User user);
 
-    void updateUser(String id, User user);
+    User updateUser(UUID id, User user);
 
-    void deleteUserById(String id);
+    void deleteUserById(UUID id);
 }
